@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>模版引擎</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+</head>
+<body>
+基本属性:
+<p th:text="'用户id：' + ${session.user.id}"/>
+<p th:text="'用户姓名：' + ${user1.name}"/>
+<p th:text="'用户密码：' + ${user1.password}"/>
+<br>
+数据处理:
+<p th:text="'list集合的长度为:'+${#sets.size(list)}"/>
+<p th:text="'list集合是否包含字符2:'+${#sets.contains(list,'2')}"/>
+<p th:text="'取list集合第三个值为:'+${list[2]}"/>
+<br>
+路径处理:
+<br>
+<a th:href="@{/product/comments(prodId=${session.user.id},prodId2=${session.user.id})}" >查看</a><br>
+<a th:href="@{/user/index(id=${2})}">访问controller方法</a><br>
+<a th:href="@{/user/index(id=${session.user.id})}">访问controller方法</a>
+<br><br><br>
+逻辑判断:>、<、>=、<=、==、!=、lt、gt、le、ge、eq、ne
+<br><br><br>
+<span th:if="${user1.name eq '董佳文' && user1.password == '123'}">
+欢迎访问1！
+</span>
+<br><br><br>
+<span th:if="${user1.name ne '董佳文'}">
+欢迎访问2！
+</span>
+数组遍历:
+<br><br>
+<table>
+    <tr><td>No.</td><td>UID</td><td>姓名</td></tr>
+    <tr th:each="user1,memberStat:${list1}">
+        <td th:text="${memberStat.index + 1}"/>
+        <span th:if="${user1.id == 1}"><td th:text="${user1.id}"/></span>
+        <td th:text="${user1.name}"/>
+    </tr>
+</table>
+</body>
+</html>
