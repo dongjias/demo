@@ -20,6 +20,8 @@ public class UserController {
 
     @RequestMapping("index")
     public String index(int id){
+        System.out.println("11");
+
         System.out.println(id);
         return "login";
     }
